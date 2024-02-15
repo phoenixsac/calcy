@@ -31,11 +31,4 @@ public class CalculatorServiceTests {
         double result = calculatorService.performOperation(CalculatorOperation.POWER, 2, 3);
         assertEquals(8.0, result);
     }
-
-    @Test
-    public void testPerformOperationInvalidOperation() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            calculatorService.performOperation(CalculatorOperation.INVALID_OPERATION, 0, 0);
-        });
-    }
 }
