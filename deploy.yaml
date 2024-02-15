@@ -1,28 +1,28 @@
-- name: Deploy Docker image
-  hosts: localhost
-  gather_facts: no
-  vars:
-    dockerhub_username: "{{ lookup('env', 'DOCKERHUB_USERNAME') }}"
-    dockerhub_password: "{{ lookup('env', 'DOCKERHUB_PASSWORD') }}"
-    container_name: "{{ lookup('env', 'CONTAINER_NAME') }}"
-    image_name: "{{ lookup('env', 'DOCKER_IMAGE_NAME') }}"
-    image_tag: "{{ lookup('env', 'DOCKER_IMAGE_TAG') }}"
-    repository: "{{ lookup('env', 'REPOSITORY_NAME') }}"
-  tasks:
-    - name: Pull Docker image from Docker Hub
-      docker_image:
-        name: "{{ repository }}:{{ image_tag }}"
-        source: pull
-        source_username: "{{ dockerhub_username }}"
-        source_password: "{{ dockerhub_password }}"
-
-    - name: Run Docker container
-      docker_container:
-        name: "{{ container_name }}"
-        image: "{{ repository }}:{{ image_tag }}"
-        state: started
-        ports:
-          - "8082:8082"
+#- name: Deploy Docker image
+#  hosts: localhost
+#  gather_facts: no
+#  vars:
+#    dockerhub_username: "{{ lookup('env', 'DOCKERHUB_USERNAME') }}"
+#    dockerhub_password: "{{ lookup('env', 'DOCKERHUB_PASSWORD') }}"
+#    container_name: "{{ lookup('env', 'CONTAINER_NAME') }}"
+#    image_name: "{{ lookup('env', 'DOCKER_IMAGE_NAME') }}"
+#    image_tag: "{{ lookup('env', 'DOCKER_IMAGE_TAG') }}"
+#    repository: "{{ lookup('env', 'REPOSITORY_NAME') }}"
+#  tasks:
+#    - name: Pull Docker image from Docker Hub
+#      docker_image:
+#        name: "{{ repository }}:{{ image_tag }}"
+#        source: pull
+#        source_username: "{{ dockerhub_username }}"
+#        source_password: "{{ dockerhub_password }}"
+#
+#    - name: Run Docker container
+#      docker_container:
+#        name: "{{ container_name }}"
+#        image: "{{ repository }}:{{ image_tag }}"
+#        state: started
+#        ports:
+#          - "8082:8082"
 
 
 ##ANSIBLE PPLAYBOOK
@@ -67,4 +67,29 @@
 #        state: started
 #        ports:
 #           - "8082:8082"
+
+- name: Fetch and run Docker image from Docker Hub
+  hosts: localhost
+  connection: local
+  vars:
+    dockerhub_username: "{{ lookup('env', 'DOCKERHUB_USERNAME') }}"
+    dockerhub_password: "{{ lookup('env', 'DOCKERHUB_PASSWORD') }}"
+    repository: "phoenixsac/calcy-repo"
+    image_tag: "latest"
+  tasks:
+    - name: Pull Docker image from Docker Hub
+      docker_image:
+        name: "{{ repository }}:{{ image_tag }}"
+        source: pull
+        source_username: "{{ dockerhub_username }}"
+        source_password: "{{ dockerhub_password }}"
+
+    - name: Run Docker container
+      docker_container:
+        name: calcy-container
+        image: "{{ repository }}:{{ image_tag }}"
+        state: started
+        ports:
+          - "8082:8082"
+
 
