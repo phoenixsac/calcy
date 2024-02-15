@@ -1,0 +1,42 @@
+#ANSIBLE PPLAYBOOK
+- name: Deploy Docker image
+  hosts: localhost
+  gather_facts: no
+  vars:
+    dockerhub_username: "{{ lookup('env', 'DOCKERHUB_USERNAME') }}"
+    dockerhub_password: "{{ lookup('env', 'DOCKERHUB_PASSWORD') }}"
+    container_name: "{{ lookup('env', 'CONTAINER_NAME') }}"
+    image_name: "{{ lookup('env', 'DOCKER_FULL_IMAGE_NAME') }}"
+    image_tag: "{{ lookup('env', 'DOCKER_IMAGE_TAG') }}"
+  tasks:
+    - name: Pull Docker image from Docker Hub
+      docker_image:
+        name: "{{ dockerhub_username }}/{{ image_name }}:{{ image_tag }}"
+        source: pull
+
+    - name: Run Docker container
+      docker_container:
+        name: "{{ container_name }}"
+        image: "{{ dockerhub_username }}/{{ image_name }}:{{ image_tag }}"
+        state: started
+        ports:
+          - "8082:8082"
+
+
+#- name: Fetch and run Docker image from Docker Hub
+#  hosts: localhost
+#  connection: local
+#  tasks:
+#    - name: Pull Docker image from Docker Hub
+#      docker_image:
+#        name: "phoenixsac/calcy-repo:latest"
+#        source: pull
+#
+#    - name: Run Docker container
+#      docker_container:
+#        name: calcy-container
+#        image: "phoenixsac/calcy-repo:latest"
+#        state: started
+#        ports:
+#           - "8082:8082"
+
