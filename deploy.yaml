@@ -6,18 +6,19 @@
     dockerhub_username: "{{ lookup('env', 'DOCKERHUB_USERNAME') }}"
     dockerhub_password: "{{ lookup('env', 'DOCKERHUB_PASSWORD') }}"
     container_name: "{{ lookup('env', 'CONTAINER_NAME') }}"
-    image_name: "{{ lookup('env', 'DOCKER_FULL_IMAGE_NAME') }}"
+    image_name: "{{ lookup('env', 'DOCKER_IMAGE_NAME') }}"
     image_tag: "{{ lookup('env', 'DOCKER_IMAGE_TAG') }}"
+    repository: "{{ lookup('env', 'REPOSITORY_NAME') }}"
   tasks:
     - name: Pull Docker image from Docker Hub
       docker_image:
-        name: "{{ dockerhub_username }}/{{ image_name }}:{{ image_tag }}"
+        name: "{{ dockerhub_username }}/{{ repository }}:{{ image_tag }}"
         source: pull
 
     - name: Run Docker container
       docker_container:
         name: "{{ container_name }}"
-        image: "{{ dockerhub_username }}/{{ image_name }}:{{ image_tag }}"
+        image: "{{ dockerhub_username }}/{{ repository }}:{{ image_tag }}"
         state: started
         ports:
           - "8082:8082"
