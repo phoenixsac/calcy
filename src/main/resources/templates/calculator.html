@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Scientific Calculator</title>
+</head>
+<body>
+<h2>Scientific Calculator</h2>
+<form action="/" method="post">
+    <label for="operation">Select Operation:</label>
+    <select id="operation" name="operation">
+        <option th:each="op : ${operations}" th:value="${op}" th:text="${op}"></option>
+    </select>
+    <br>
+    <label for="operand">Operand:</label>
+    <input type="text" id="operand" name="operand">
+    <br>
+    <div id="secondOperandDiv" style="display: none;">
+        <label for="secondOperand">Second Operand:</label>
+        <input type="text" id="secondOperand" name="secondOperand">
+        <br>
+    </div>
+    <button type="submit">Calculate</button>
+</form>
+<div th:if="${result != null}">
+    <h3>Result: <span th:text="${result}"></span></h3>
+</div>
+<script>
+    document.getElementById('operation').addEventListener('change', function () {
+        var selectedOperation = this.value;
+        if (selectedOperation === 'POWER') {
+            document.getElementById('secondOperandDiv').style.display = 'block';
+        } else {
+            document.getElementById('secondOperandDiv').style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>
