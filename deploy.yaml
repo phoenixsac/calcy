@@ -72,8 +72,8 @@
   hosts: localhost
   connection: local
   vars:
-    dockerhub_username: "{{ lookup('env', 'DOCKERHUB_USERNAME') }}"
-    dockerhub_password: "{{ lookup('env', 'DOCKERHUB_PASSWORD') }}"
+    dockerhub_username: "{{ lookup('env', 'DOCKERHUB_CRED_USR') }}"
+    dockerhub_password: "{{ lookup('env', 'DOCKERHUB_CRED_PSW') }}"
     repository: "phoenixsac/calcy-repo"
     image_tag: "latest"
   tasks:
