@@ -51,45 +51,45 @@
 #          - "8082:8082"
 
 
-- name: Fetch and run Docker image from Docker Hub
-  hosts: localhost
-  connection: local
-  tasks:
-    - name: Pull Docker image from Docker Hub
-      docker_image:
-        name: "phoenixsac/calcy-repo:latest"
-        source: pull
-
-    - name: Run Docker container
-      docker_container:
-        name: calcy-container
-        image: "phoenixsac/calcy-repo:latest"
-        state: started
-        ports:
-           - "8082:8082"
-
 #- name: Fetch and run Docker image from Docker Hub
 #  hosts: localhost
 #  connection: local
-#  vars:
-#    dockerhub_username: "{{ lookup('env', 'DOCKERHUB_USERNAME') }}"
-#    dockerhub_password: "{{ lookup('env', 'DOCKERHUB_PASSWORD') }}"
-#    repository: "phoenixsac/calcy-repo"
-#    image_tag: "latest"
 #  tasks:
 #    - name: Pull Docker image from Docker Hub
 #      docker_image:
-#        name: "{{ repository }}:{{ image_tag }}"
+#        name: "phoenixsac/calcy-repo:latest"
 #        source: pull
-#        source_username: "{{ dockerhub_username }}"
-#        source_password: "{{ dockerhub_password }}"
 #
 #    - name: Run Docker container
 #      docker_container:
 #        name: calcy-container
-#        image: "{{ repository }}:{{ image_tag }}"
+#        image: "phoenixsac/calcy-repo:latest"
 #        state: started
 #        ports:
-#          - "8082:8082"
+#           - "8082:8082"
+
+- name: Fetch and run Docker image from Docker Hub
+  hosts: localhost
+  connection: local
+  vars:
+    dockerhub_username: "{{ lookup('env', 'DOCKERHUB_USERNAME') }}"
+    dockerhub_password: "{{ lookup('env', 'DOCKERHUB_PASSWORD') }}"
+    repository: "phoenixsac/calcy-repo"
+    image_tag: "latest"
+  tasks:
+    - name: Pull Docker image from Docker Hub
+      docker_image:
+        name: "{{ repository }}:{{ image_tag }}"
+        source: pull
+        source_username: "{{ dockerhub_username }}"
+        source_password: "{{ dockerhub_password }}"
+
+    - name: Run Docker container
+      docker_container:
+        name: calcy-container
+        image: "{{ repository }}:{{ image_tag }}"
+        state: started
+        ports:
+          - "8082:8082"
 
 
