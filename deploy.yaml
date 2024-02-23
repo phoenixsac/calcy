@@ -51,6 +51,8 @@
 #          - "8082:8082"
 
 
+
+
 - name: Fetch and run Docker image from Docker Hub
   hosts: localhost
   connection: local
@@ -67,6 +69,13 @@
         state: started
         ports:
            - "8082:8082"
+           -
+
+
+
+
+
+
 #
 #- name: Fetch and run Docker image from Docker Hub
 #  hosts: localhost
