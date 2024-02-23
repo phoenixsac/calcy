@@ -37,7 +37,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 cleanWs()
-                git branch: 'dev', url: 'https://github.com/phoenixsac/calcy.git'
+                git branch: 'dev', credentialsId: 'dockerhub-cred', url: 'https://github.com/phoenixsac/calcy.git'
             }
         }
 
