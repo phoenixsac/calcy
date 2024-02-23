@@ -65,7 +65,7 @@ pipeline {
                 script {
                     //docker.build("${DOCKER_IMAGE_NAME}", "-f ${DOCKER_FILE_PATH} .")
                     echo "Docker Image Name: ${DOCKER_FULL_IMAGE_NAME}"
-                    sh 'docker build("${DOCKER_IMAGE_NAME}", '.')
+                    docker.build("${DOCKER_IMAGE_NAME}", '.')
                     sh 'docker tag ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} ${DOCKER_FULL_IMAGE_NAME}'
                     //sh 'docker push ${DOCKER_FULL_IMAGE_NAME}'
 					//docker.build("${DOCKER_FULL_IMAGE_NAME}:latest", "-f ${DOCKER_FILE_PATH} .")
