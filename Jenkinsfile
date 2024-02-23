@@ -44,8 +44,8 @@ pipeline {
         stage('Build') {
             steps {
                 // Use Maven to build the project
-                    sh "pwd"
-                    println sh(script: 'mvn --version', returnStdout: true)
+                    // sh "pwd"
+                    // println sh(script: 'mvn --version', returnStdout: true)
                     sh 'mvn clean install -DskipTests'
 
             }
