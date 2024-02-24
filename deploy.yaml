@@ -20,8 +20,6 @@
            - "8082:8082"
            
 
-#  vars:
-#    dockerhub_username: "{{ lookup('env', 'DOCKERHUB_CRED_USR') }}"
 #    dockerhub_password: "{{ lookup('env', 'DOCKERHUB_CRED_PSW') }}"
 #    repository: "phoenixsac/calcy-repo"
 #    image_tag: "latest"
