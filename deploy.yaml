@@ -20,8 +20,6 @@
            - "8082:8082"
            
 
-#    image_tag: "latest"
-#  tasks:
 #    - name: Pull Docker image from Docker Hub
 #      docker_image:
 #        name: "{{ repository }}:{{ image_tag }}"
