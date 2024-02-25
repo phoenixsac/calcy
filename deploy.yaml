@@ -20,7 +20,7 @@
            - "8082:8082"
            
 
-#    - name: Pull Docker image from Docker Hub
+
 #      docker_image:
 #        name: "{{ repository }}:{{ image_tag }}"
 #        source: pull
