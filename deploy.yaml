@@ -20,7 +20,6 @@
            - "8082:8082"
            
 
-#    repository: "phoenixsac/calcy-repo"
 #    image_tag: "latest"
 #  tasks:
 #    - name: Pull Docker image from Docker Hub
