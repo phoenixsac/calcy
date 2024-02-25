@@ -20,7 +20,6 @@
            - "8082:8082"
            
 
-#    dockerhub_password: "{{ lookup('env', 'DOCKERHUB_CRED_PSW') }}"
 #    repository: "phoenixsac/calcy-repo"
 #    image_tag: "latest"
 #  tasks:
