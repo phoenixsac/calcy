@@ -19,7 +19,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 cleanWs()
-                git branch: 'dev', url: 'https://github.com/phoenixsac/calcy.git'
+                git branch: 'dev', credentialsId: 'dockerhub-cred', url: 'https://github.com/phoenixsac/calcy.git'
             }
         }
 
@@ -27,7 +27,7 @@ pipeline {
             steps {
                     sh "pwd"
                     println sh(script: 'mvn --version', returnStdout: true)
-                    sh 'mvn clean install -DskipTests'
+                    sh 'mvn clean install'
 
             }
         }
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     echo "Docker Image Name: ${DOCKER_FULL_IMAGE_NAME}"
-                    sh 'docker build -t ${DOCKER_IMAGE_NAME} .'
+                    docker.build("${DOCKER_IMAGE_NAME}", '.')
                     sh 'docker tag ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} ${DOCKER_FULL_IMAGE_NAME}'
                 }
             }
