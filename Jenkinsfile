@@ -67,7 +67,7 @@ pipeline {
                         sh 'wsl ansible --version'
                         sh 'wsl ansible-playbook -vvvv deploy.yaml'
                     }
-            }
+             }
         }
 
     }
