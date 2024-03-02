@@ -60,6 +60,19 @@ pipeline {
                 }
             }
 
+	    stage('Stop and remove existing container') {
+	    steps {
+		script {
+		    sh 'docker stop calcy-container || true'
+		    sh 'echo "Running containers:"'
+                    sh 'docker ps'
+		    sh 'docker rm -f calcy-container || true'
+		    sh 'echo "All containers: "'
+                    sh 'docker ps -a'
+		}
+	    }
+	}
+
 
 		stage('Deploy with Ansible') {
             steps {
