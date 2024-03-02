@@ -65,7 +65,7 @@ pipeline {
             steps {
                     script{
                         sh 'wsl ansible --version'
-                        sh 'wsl ansible-playbook -vvvv deploy.yaml'
+                        sh 'wsl ansible-playbook -vvv deploy.yaml'
                     }
              }
         }
